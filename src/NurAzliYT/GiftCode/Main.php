@@ -93,14 +93,15 @@ class Main extends PluginBase implements Listener {
 
     public function RedeemMenu($player){
      if($player instanceof Player){
-      $form = $this->createCustomForm(function(Player $player, array $data)){
+      $form = $this->createCustomForm(function(Player $player, array $data))  
       $result = $data[0];
       if($result != null){
        if($this->codeExists($this->giftcode, $result)) {
         if(!($this->codeExists($this->used, $result))) {
          $this->addCode($this->used, $result);
         }
-            
+       }
+    
             case 0:
           $player->sendMessage($file->get("Getting-rewarded") §r§f $file->get("Reward")");
           $this->eco->addMoney($player->getName(), $file->get("Reward"));
@@ -181,5 +182,5 @@ $form->sendToPlayer($player);
         }
      }
      return true;
-     }
+}
 }
