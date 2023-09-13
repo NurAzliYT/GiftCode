@@ -9,5 +9,7 @@ commands:
  gencode:
      description: "Generate a code"
      permission: giftcode.gencode
+     default: op
  redeem:
      description: use a code
+     default: true
