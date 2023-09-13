@@ -11,7 +11,7 @@ use pocketmine\item\Item;
 use pocketmine\event\player\PlayerQuitEvent;
 use NurAzliYT\GiftCode\FormEvent\Form;
 use NurAzliYT\GiftCode\FormEvent\CustomForm;
-use onebone\economyapi\EconomyAPI;
+use cooldogedev\BedrockEconomy\BedrockEconomy;
 
 class Main extends PluginBase implements Listener {
 
