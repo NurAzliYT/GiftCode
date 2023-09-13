@@ -99,7 +99,7 @@ class Main extends PluginBase implements Listener {
        if($this->codeExists($this->giftcode, $result)) {
         if(!($this->codeExists($this->used, $result))) {
          $this->addCode($this->used, $result);
-         case 4:
+            case 0:
           $player->sendMessage($file->get("Getting-rewarded") §r§f $file->get("Reward")");
           $this->eco->addMoney($player->getName(), $file->get("Reward"));
           break;
@@ -107,19 +107,21 @@ class Main extends PluginBase implements Listener {
           $player->sendMessage("$file->get("Error") §r§f!");
           break;
         }
-     }else{
+     }
+          {
+       else{
        $player->sendMessage("$file->get("Already-used") §r§f!");
         return true;
        }
-    }else{
+       else{
       $player->sendMessage("$file->get("Not-found") §r§f!");
       return true;
      }
-  }else{
+      else{
     $player->sendMessage("$file->get("No-input") §r§f!");
     return true;
    }
-});
+);
 $form->setTitle("$file->get("Ui-title");
 $form->addInput("$file->get("Ui-text");
 $form->sendToPlayer($player);
