@@ -1,56 +1,70 @@
 <?php
 
-declare(strict_types = 1);
+#=========================================================================================================================#
 
-namespace jojoe77777\FormAPI;
+namespace NurAzliYT\GiftCode\FormEvent;
 
-use pocketmine\form\Form as IForm;
-use pocketmine\player\Player;
+#=========================================================================================================================#
 
-abstract class Form implements IForm{
+use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
+use pocketmine\Player;
 
-    /** @var array */
-    protected $data = [];
-    /** @var callable|null */
+#=========================================================================================================================#
+
+abstract class Form {
+
+#=========================================================================================================================#
+
+    public $id;
+    private $data = [];
+    public $playerName;
     private $callable;
 
-    /**
-     * @param callable|null $callable
-     */
-    public function __construct(?callable $callable) {
-        $this->callable = $callable;
+#=========================================================================================================================#
+
+    public function __construct(int $id, ?callable $callable) {
+     $this->id = $id;
+     $this->callable = $callable;
     }
 
-    /**
-     * @deprecated
-     * @see Player::sendForm()
-     *
-     * @param Player $player
-     */
-    public function sendToPlayer(Player $player) : void {
-        $player->sendForm($this);
+#=========================================================================================================================#
+
+    public function getId() : int {
+     return $this->id;
     }
+
+#=========================================================================================================================#
+
+    public function sendToPlayer(Player $player) : void {
+     $pk = new ModalFormRequestPacket();
+     $pk->formId = $this->id;
+     $pk->formData = json_encode($this->data);
+     $player->dataPacket($pk);
+     $this->playerName = $player->getName();
+    }
+
+#=========================================================================================================================#
+
+    public function isRecipient(Player $player) : bool {
+     return $player->getName() === $this->playerName;
+    }
+
+#=========================================================================================================================#
 
     public function getCallable() : ?callable {
-        return $this->callable;
+     return $this->callable;
     }
+
+#=========================================================================================================================#
 
     public function setCallable(?callable $callable) {
-        $this->callable = $callable;
+     $this->callable = $callable;
     }
 
-    public function handleResponse(Player $player, $data) : void {
-        $this->processData($data);
-        $callable = $this->getCallable();
-        if($callable !== null) {
-            $callable($player, $data);
-        }
-    }
+#=========================================================================================================================#
 
     public function processData(&$data) : void {
     }
+ }
 
-    public function jsonSerialize():array{
-        return $this->data;
-    }
-}
+#=========================================================================================================================#
