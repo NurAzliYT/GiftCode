@@ -28,7 +28,7 @@ class Main extends PluginBase implements Listener {
      if(is_null($plugin)) {
      $this->getServer()->shutdown();
      }else{
-      $this->eco = EconomyAPI::getInstance();
+      $this->eco = BedrockEconomy::getInstance();
      }
      $this->formCount = rand(0, 0xFFFFFFFF);
      $this->getServer()->getPluginManager()->registerEvents($this, $this);
