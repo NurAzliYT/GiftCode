@@ -23,7 +23,7 @@ class Main extends PluginBase implements Listener {
     public $forms = [];
     public $file = new Config($this->plugin->getDataFolder() . "settings.yml", Config::YAML);
 
-    public function onEnable() {
+    public function onEnable(): void {
      $plugin = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
      if(is_null($plugin)) {
      $this->getServer()->shutdown();
@@ -101,9 +101,7 @@ class Main extends PluginBase implements Listener {
          $this->addCode($this->used, $result);
         }
        }
-    
-            case 0:
-          $player->sendMessage($file->get("Getting-rewarded") §r§f $file->get("Reward")");
+          $player->sendMessage($file->get("Getting-rewarded") §r§f $file->get("Reward"));
           $this->eco->addMoney($player->getName(), $file->get("Reward"));
           break;
          default:
@@ -131,7 +129,7 @@ $form->sendToPlayer($player);
 }
 }
 
-    public static function getInstance() {
+    public static function getInstance(): Main {
      return $this;
     }
 
